@@ -38,7 +38,7 @@ function TodoForm({ parentSetTodo, parentTodoList }) {
 
     return (
         <div className='todoFormWrapper' >
-            <form>
+            <form onSubmit={(event) => {event.preventDefault();handleAddTask()}}>
                 <div>
                     <input type="text" placeholder='enter you task here...' value={todoForm} onChange={handleOnChange} />
                     <button type='button' onClick={handleAddTask}>Add Task</button>
