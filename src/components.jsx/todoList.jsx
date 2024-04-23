@@ -8,14 +8,9 @@ function TodoList({ parentSetTodo, parentTodoList }) {
         const newTodo = parentTodoList.filter(item => item.id !== id)
         parentSetTodo(newTodo)
     }
-    const handleOnDone = (id) => {
-        const newTodo = parentTodoList.map(item => {
-            if (item.id === id) {
-                item.isDone = !item.isDone
-            }
-            return item
-        })
-
+    const handleOnDone = (index) => {
+        const newTodo = [...parentTodoList]
+        newTodo[index].isDone = !newTodo[index].isDone
         parentSetTodo(newTodo)
     }
     const handleOnUp = (idx) => {
@@ -44,13 +39,9 @@ function TodoList({ parentSetTodo, parentTodoList }) {
         parentSetTodo(newTodo)
     }
 
-    const chekcboxOnChange = (id) => {
-        const newTodo = parentTodoList.map(item => {
-            if (id === item.id) {
-                item.isChecked = !item.isChecked
-            }
-            return item
-        })
+    const chekcboxOnChange = (index) => {
+        const newTodo = [...parentTodoList]
+        newTodo[index].isChecked = !newTodo[index].isChecked
         parentSetTodo(newTodo)
     }
 
@@ -113,13 +104,13 @@ function TodoList({ parentSetTodo, parentTodoList }) {
 
                 : <div className='listItem' key={item.id}>
                     <div className='listName'>
-                        <input type="checkbox" checked={item.isChecked} onChange={() => chekcboxOnChange(item.id)} />
+                        <input type="checkbox" checked={item.isChecked} onChange={() => chekcboxOnChange(idx)} />
                         <p style={{ color: item.isDone ? 'green' : 'red', textDecoration: item.isDone ? "line-through": '' }}>{item.name}</p>
                     </div>
                     <div className='listItemBtns'>
                         <button className='editBtn' type='button' onClick={() => handleOnEdit(idx)} >edit</button>
                         <button className='deleteBtn' type='button' onClick={() => handleOnDelete(item.id)} >delete</button>
-                        <button className='doneBtn' type='button' onClick={() => handleOnDone(item.id)}>{item.isDone ? 'not done' : 'done'}</button>
+                        <button className='doneBtn' type='button' onClick={() => handleOnDone(idx)}>{item.isDone ? 'not done' : 'done'}</button>
                         <button className='upBtn' type='button' onClick={() => handleOnUp(idx)}>Up</button>
                         <button className='downBtn' type='button' onClick={() => handleOnDown(idx)}>Down</button>
                     </div>
