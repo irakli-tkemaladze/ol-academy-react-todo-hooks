@@ -71,7 +71,7 @@ function TodoList({ parentSetTodo, parentTodoList }) {
         const isExisted = parentTodoList.find(item => item.name === editTaskValue.trim())
         const newTodo = [...parentTodoList]
         if(newTodo[idx].name === editTaskValue){
-            handleOnEditItemCancel()
+            handleOnEditItemCancel(idx)
         }else if (editTaskValue.trim() === '') {
             setErrorMsg('გთხოვთ შეავსოთ ცარიელი ველი...')
         } else if (isExisted) {
@@ -85,8 +85,9 @@ function TodoList({ parentSetTodo, parentTodoList }) {
 
     }
 
-    const handleOnEditItemCancel = () => {
-        const newTodo = parentTodoList.map(item => ({ ...item, editMode: false }))
+    const handleOnEditItemCancel = (idx) => {
+        const newTodo = [...parentTodoList]
+        newTodo[idx].editMode = false
         parentSetTodo(newTodo)
     }
 
@@ -97,7 +98,7 @@ function TodoList({ parentSetTodo, parentTodoList }) {
                     <div>
                     <input type="text" placeholder='enter edited task here...' value={editTaskValue} onChange={handleOnChange} />
                     <button className='saveBtn' type='button' onClick={() => handleOnEditedItemSave(idx)} >save</button>
-                    <button className='cancelEditModeBtn' type='button' onClick={handleOnEditItemCancel} >cancel</button>
+                    <button className='cancelEditModeBtn' type='button' onClick={() => handleOnEditItemCancel(idx)} >cancel</button>
                     </div>
                     <p style={{ color: 'red' }} >{errorMsg}</p>   
                 </div>
