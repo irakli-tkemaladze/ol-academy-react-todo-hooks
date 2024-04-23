@@ -1,0 +1,33 @@
+.todoFormWrapper {
+    form {
+        display: flex;
+        row-gap: 1rem;
+        flex-direction: column;
+
+        div {
+            display: flex;
+            gap: 1rem;
+            
+            input {
+                flex-grow: 1;
+                height: 2rem;
+                padding: 0 1rem;
+            }
+
+            button {
+                border-radius: 0.4rem;
+                background-color: rgba(0, 128, 0, 0.369);
+                cursor: pointer;
+                border: none;
+                padding: 0 1rem;
+                color: rgb(60, 61, 62);
+                &:hover {
+                    color: beige;
+                    background-color: rgba(0, 128, 0, 0.599);
+                }
+            }
+
+
+        }
+    }
+}
